@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FinTrack Pro - Dashboard</title>
+    <link rel="stylesheet" href="dashboard.css" />
+    
+  </head>
+
+  <body>
+
+    <main>
+      <section class="dashboard">
+        <!-- SideBar Section -->
+        <div class="sidebar">
+          <div class="top-sidebar">
+            <div class="logo">
+              <img
+                src="./assests/fintrack_logo.png"
+                alt="logo"
+                class="fintrack-logo"
+              />
+              <div>
+                <h2>FinTrack Pro</h2>
+                <p class="card-title">Enterprise Finance</p>
+              </div>
+            </div>
+            <div class="feature-btn">
+              <div class="nav-menu">
+                <img
+                  src="./assests/dashboard.png"
+                  alt="Dashboard"
+                  class="feat-logo"
+                />
+                <p>Dashboard</p>
+              </div>
+              <div class="nav-menu">
+                <img
+                  src="./assests/settings.png"
+                  alt="Setttings"
+                  class="feat-logo"
+                />
+                <p>Setting</p>
+              </div>
+            </div>
+          </div>
+          <div >
+            <button class="bottom-sidebar">+ Add Transaction</button>
+          </div>
+        </div>
+        <!-- NavBar Section -->
+        <nav class="navbar">
+          <div class="divider"></div>
+          <div class="username">Anuj</div>
+          <button class="logout-btn">
+            <img src="./assests/logout.png" alt="Logout" class="logout-icon" />
+            Logout
+          </button>
+        </nav>
+
+        <!-- Heading Section -->
+        <div class="heading">
+          <h1>Financial Overview</h1>
+          <p class="card-title">Real-time tracking application</p>
+        </div>
+        <!-- Cards Section -->
+        <div class="cards">
+          <article class="summary-card">
+            <div class="card-icon balance-icon">
+              <img
+                src="./assests/bank.png"
+                alt="Current Balance"
+                class="cards-logo"
+              />
+            </div>
+
+            <p class="card-title">Current Balance</p>
+
+            <h2 class="card-value balance-value">$0.00</h2>
+          </article>
+
+          <article class="summary-card">
+            <div class="card-icon income-icon">
+              <img
+                src="./assests/Income.png"
+                alt="Total Income"
+                class="cards-logo"
+              />
+            </div>
+
+            <p class="card-title">Total Income</p>
+
+            <h2 class="card-value income-value">$0.00</h2>
+          </article>
+
+          <article class="summary-card">
+            <div class="card-icon expense-icon">
+              <img
+                src="./assests/expense.png"
+                alt="Total Expense"
+                class="cards-logo"
+              />
+            </div>
+
+            <p class="card-title">Total Expense</p>
+
+           <h2 class="card-value expense-value">$0.00</h2>
+          </article>
+
+          <article class="summary-card">
+            <div class="card-icon transaction-icon">
+              <img
+                src="./assests/totaltransaction.png"
+                alt="Total Transactions"
+                class="cards-logo"
+              />
+            </div>
+
+            <p class="card-title">Total Transactions</p>
+
+           <h2 class="card-value transaction-value">0</h2>
+          </article>
+        </div>
+
+        <!-- Charts and Prefrences Section -->
+
+
+<section class="analytics">
+        <section class="chart-card">
+
+   <h2 class="chart-title">Cash Flow Analysis</h2>
+
+    <div class="chart-container">
+        <canvas id="cashFlowChart"></canvas>
+    </div>
+   </section>
+  
+          <section class="preferences">
+            <h1>Prefrences</h1>
+            <div class="dark-btn">
+              <h5>Dark Mode</h5>
+
+            <label class="switch">
+            <input type="checkbox">
+            <span class="slider round"></span>
+            </label>
+
+            </div>
+            <hr />
+            <button class="reset">
+              <img
+                src="./assests/delete.png"
+                alt="reset"
+                class="reset-icon"
+              />Reset All Data
+            </button>
+          </section>
+        <!-- Transcation history Section -->
+        <div class="alltransaction">
+          <h1>All Transaction</h1>
+
+          <div class="transaction-toolbar">
+            <div class="search">
+              <img
+                src="./assests/search.png"
+                alt="search"
+                class="search-icon"
+              />
+              <input type="text" name="search" placeholder="Search transactions..." id="search" />
+            </div>
+            <div class="filter">
+              <select name="filter" id="">
+                <option value="All Transaction">All Types</option>
+                <option value="Income">Income Only</option>
+                <option value="Expense">Expense Only</option>
+              </select>
+            </div>
+          </div>
+          <div class="history">
+            <table>
+             <thead>
+         <tr>
+        <th>Date</th>
+        <th>Description</th>
+        <th>Category</th>
+        <th>Amount</th>
+        <th>Actions</th>
+    </tr>
+</thead>
+<tbody id="transactionBody"></tbody>
+            </table>
+
+          </div>
+        </div>
+      </section>
+    </section>
+    </main>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="dashboard.js"></script>
+  </body>
+</html>

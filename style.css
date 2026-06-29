@@ -1,0 +1,86 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+}
+
+html,
+body {
+    height: 100%;
+    width: 100%;
+    font-family: "Inter", sans-serif;
+}
+
+main {
+    height: 100%;
+    width: 100%;
+    background-color: #f4f7f6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.main-heading {
+    text-align: center;
+    font-size: 25px;
+}
+
+input {
+    padding: 9px;
+    width: 100%;
+    border: 1px solid black;
+    border-radius: 6px;
+}
+
+p {
+    text-align: center;
+}
+
+.login-card {
+    width: 100%;
+    max-width: 400px;
+    border-radius: 10px;
+    box-shadow: 0 5px 6px rgba(0, 0, 0, 0.1);
+
+    padding: 35px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+}
+
+a {
+    text-decoration: none;
+    color: #0056b3;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+
+}
+
+button {
+    width: 100%;
+    padding: 9px;
+    background-color: #0056b3;
+    color: white;
+    border: 1px;
+    border-radius: 5px;
+    box-shadow: 0 5px 6px rgba(0, 0, 0, 0.1);
+}
+
+.registerbtn {
+    background-color: #28a745;
+}
