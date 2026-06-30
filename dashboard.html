@@ -5,11 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>FinTrack Pro - Dashboard</title>
     <link rel="stylesheet" href="dashboard.css" />
-    
   </head>
 
   <body>
-
     <main>
       <section class="dashboard">
         <!-- SideBar Section -->
@@ -22,12 +20,16 @@
                 class="fintrack-logo"
               />
               <div>
-                <h2>FinTrack Pro</h2>
+                <h2 class="logo-name">FinTrack Pro</h2>
                 <p class="card-title">Enterprise Finance</p>
               </div>
             </div>
             <div class="feature-btn">
-              <div class="nav-menu">
+              <div
+                class="nav-menu active"
+                id="nav-dashboard"
+                data-target="dashboard-page"
+              >
                 <img
                   src="./assests/dashboard.png"
                   alt="Dashboard"
@@ -35,168 +37,252 @@
                 />
                 <p>Dashboard</p>
               </div>
-              <div class="nav-menu">
+              <div
+                class="nav-menu"
+                id="nav-settings"
+                data-target="settings-page"
+              >
                 <img
                   src="./assests/settings.png"
-                  alt="Setttings"
+                  alt="Settings"
                   class="feat-logo"
                 />
-                <p>Setting</p>
+                <p>Settings</p>
               </div>
             </div>
           </div>
-          <div >
+          <div>
             <button class="bottom-sidebar">+ Add Transaction</button>
           </div>
         </div>
         <!-- NavBar Section -->
         <nav class="navbar">
           <div class="divider"></div>
-          <div class="username">Anuj</div>
+          <div class="username" id="navbar-username">Anuj</div>
           <button class="logout-btn">
             <img src="./assests/logout.png" alt="Logout" class="logout-icon" />
             Logout
           </button>
         </nav>
 
-        <!-- Heading Section -->
-        <div class="heading">
-          <h1>Financial Overview</h1>
-          <p class="card-title">Real-time tracking application</p>
-        </div>
-        <!-- Cards Section -->
-        <div class="cards">
-          <article class="summary-card">
-            <div class="card-icon balance-icon">
-              <img
-                src="./assests/bank.png"
-                alt="Current Balance"
-                class="cards-logo"
-              />
+        <!-- Main Content Area -->
+        <div class="main-content">
+          <!-- Dashboard Page -->
+          <section id="dashboard-page" class="page-content active">
+            <!-- Heading Section -->
+            <div class="heading">
+              <h1>Financial Overview</h1>
+              <p class="card-title">Real-time tracking application</p>
+            </div>
+            <!-- Cards Section -->
+            <div class="cards">
+              <article class="summary-card">
+                <div class="card-icon balance-icon">
+                  <img
+                    src="./assests/bank.png"
+                    alt="Current Balance"
+                    class="cards-logo"
+                  />
+                </div>
+                <p class="card-title">Current Balance</p>
+                <h2 class="card-value balance-value">$0.00</h2>
+              </article>
+
+              <article class="summary-card">
+                <div class="card-icon income-icon">
+                  <img
+                    src="./assests/Income.png"
+                    alt="Total Income"
+                    class="cards-logo"
+                  />
+                </div>
+                <p class="card-title">Total Income</p>
+                <h2 class="card-value income-value">$0.00</h2>
+              </article>
+
+              <article class="summary-card">
+                <div class="card-icon expense-icon">
+                  <img
+                    src="./assests/expense.png"
+                    alt="Total Expense"
+                    class="cards-logo"
+                  />
+                </div>
+                <p class="card-title">Total Expense</p>
+                <h2 class="card-value expense-value">$0.00</h2>
+              </article>
+
+              <article class="summary-card">
+                <div class="card-icon transaction-icon">
+                  <img
+                    src="./assests/totaltransaction.png"
+                    alt="Total Transactions"
+                    class="cards-logo"
+                  />
+                </div>
+                <p class="card-title">Total Transactions</p>
+                <h2 class="card-value transaction-value">0</h2>
+              </article>
             </div>
 
-            <p class="card-title">Current Balance</p>
+            <!-- Charts and Preferences Section -->
+            <div class="analytics">
+              <section class="chart-card">
+                <h2 class="chart-title">Cash Flow Analysis</h2>
+                <div class="chart-container">
+                  <canvas id="cashFlowChart"></canvas>
+                </div>
+              </section>
 
-            <h2 class="card-value balance-value">$0.00</h2>
-          </article>
+              <section class="preferences">
+                <h1>Preferences</h1>
+                <div class="dark-btn">
+                  <h5>Dark Mode</h5>
+                  <label class="switch">
+                    <input type="checkbox" id="dashboard-dark-toggle" />
+                    <span class="slider round"></span>
+                  </label>
+                </div>
+                <hr />
+                <button class="reset">
+                  <img
+                    src="./assests/delete.png"
+                    alt="reset"
+                    class="reset-icon"
+                  />Reset All Data
+                </button>
+              </section>
 
-          <article class="summary-card">
-            <div class="card-icon income-icon">
-              <img
-                src="./assests/Income.png"
-                alt="Total Income"
-                class="cards-logo"
-              />
+              <!-- Transaction history Section -->
+              <div class="alltransaction">
+                <h1>All Transactions</h1>
+                <div class="transaction-toolbar">
+                  <div class="search">
+                    <img
+                      src="./assests/search.png"
+                      alt="search"
+                      class="search-icon"
+                    />
+                    <input
+                      type="text"
+                      name="search"
+                      placeholder="Search transactions..."
+                      id="search"
+                    />
+                  </div>
+                  <div class="filter">
+                    <select name="filter" id="transaction-filter">
+                      <option value="All Transaction">All Types</option>
+                      <option value="Income">Income Only</option>
+                      <option value="Expense">Expense Only</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="history">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Date</th>
+                        <th>Description</th>
+                        <th>Category</th>
+                        <th>Amount</th>
+                        <th>Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody id="transactionBody"></tbody>
+                  </table>
+                </div>
+              </div>
             </div>
-
-            <p class="card-title">Total Income</p>
-
-            <h2 class="card-value income-value">$0.00</h2>
-          </article>
-
-          <article class="summary-card">
-            <div class="card-icon expense-icon">
-              <img
-                src="./assests/expense.png"
-                alt="Total Expense"
-                class="cards-logo"
-              />
-            </div>
-
-            <p class="card-title">Total Expense</p>
-
-           <h2 class="card-value expense-value">$0.00</h2>
-          </article>
-
-          <article class="summary-card">
-            <div class="card-icon transaction-icon">
-              <img
-                src="./assests/totaltransaction.png"
-                alt="Total Transactions"
-                class="cards-logo"
-              />
-            </div>
-
-            <p class="card-title">Total Transactions</p>
-
-           <h2 class="card-value transaction-value">0</h2>
-          </article>
-        </div>
-
-        <!-- Charts and Prefrences Section -->
-
-
-<section class="analytics">
-        <section class="chart-card">
-
-   <h2 class="chart-title">Cash Flow Analysis</h2>
-
-    <div class="chart-container">
-        <canvas id="cashFlowChart"></canvas>
-    </div>
-   </section>
-  
-          <section class="preferences">
-            <h1>Prefrences</h1>
-            <div class="dark-btn">
-              <h5>Dark Mode</h5>
-
-            <label class="switch">
-            <input type="checkbox">
-            <span class="slider round"></span>
-            </label>
-
-            </div>
-            <hr />
-            <button class="reset">
-              <img
-                src="./assests/delete.png"
-                alt="reset"
-                class="reset-icon"
-              />Reset All Data
-            </button>
           </section>
-        <!-- Transcation history Section -->
-        <div class="alltransaction">
-          <h1>All Transaction</h1>
-
-          <div class="transaction-toolbar">
-            <div class="search">
-              <img
-                src="./assests/search.png"
-                alt="search"
-                class="search-icon"
-              />
-              <input type="text" name="search" placeholder="Search transactions..." id="search" />
+          <section id="settings-page" class="page-content">
+            <!-- Heading Section -->
+            <div class="heading">
+              <!--Setting Page -->
+              <h1>Settings</h1>
+              <p class="card-title">
+                Manage your account profile and app formatting.
+              </p>
             </div>
-            <div class="filter">
-              <select name="filter" id="">
-                <option value="All Transaction">All Types</option>
-                <option value="Income">Income Only</option>
-                <option value="Expense">Expense Only</option>
-              </select>
-            </div>
-          </div>
-          <div class="history">
-            <table>
-             <thead>
-         <tr>
-        <th>Date</th>
-        <th>Description</th>
-        <th>Category</th>
-        <th>Amount</th>
-        <th>Actions</th>
-    </tr>
-</thead>
-<tbody id="transactionBody"></tbody>
-            </table>
+            <div class="profile-card">
+              <h2>Profile Details</h2>
+              <div class="profile-mid">
+                <div class="profile-labels" id="full-name">
+                  <label for="profile-username">Full Name</label>
+                  <input type="text" id="profile-username" />
+                </div>
 
-          </div>
+                <div class="profile-labels" id="currnency">
+                  <label for="p-currency">Primary Currency</label>
+                  <select name="currnency" id="p-currency">
+                    <option value="INR">INR ₹</option>
+                    <option value="USD">USD $</option>
+                    <option value="EUR">EUR €</option>
+                    <option value="GBP">GBP £</option>
+                    <option value="JPY">JPY ¥</option>
+                  </select>
+                </div>
+              </div>
+              <button type="submit" class="savebtn">Save Changes</button>
+            </div>
+
+            <!-- Add transaction Section -->
+            <section class="add-transaction">
+              <div class="heading-section">
+                <h4>Add Transaction</h4>
+                <button type="button" class="btn-close" aria-label="Close">
+                  X
+                </button>
+              </div>
+              <div class="trasaction-type">
+                <label for="t-type">Type</label>
+                <select name="TransactionType" id="t-type">
+                  <option value="Expense">Expense</option>
+                  <option value="Income">Income</option>
+                </select>
+              </div>
+              <div class="description">
+                <label for="t-description">Description</label>
+                <input
+                  type="text"
+                  name="Description"
+                  id="t-description"
+                  placeholder="e.g. Amazon, Salary, Coffee"
+                />
+              </div>
+              <div class="Amt-date">
+                <div class="amount">
+                  <label for="t-amount">Amount</label>
+                  <input type="number" id="amount" name="amount" placeholder="0" min="0"
+                   step="0.01"
+                  />
+                </div>
+                <div class="date">
+                  <label for="t-date">Date</label>
+                  <input type="date" name="date" id="t-date" />
+                </div>
+                 </div>
+                  <div class="trasaction-category">
+                <label for="t-category">Category</label>
+                <select name="TransactionCategory" id="t-Category">
+                   <option value="Select a Category">Select a Category</option>
+                  <option value="Food & Dining">Food & Dining</option>
+                  <option value="Shooping">Shooping</option>
+                  <option value="Recharge & Bills">Recharge & Bills</option>
+                  <option value="Petrol & Auto">Petrol & Auto</option>
+                  <option value="Utilities">Utilities</option>
+                  <option value="Salary">Salary</option>
+                   <option value="Entertainment">Entertainment</option>
+                  <option value="Others">Others</option>
+                </select>
+              </div>
+               <button type="submit" class="savetranscationbtn">Save Transcation</button>
+            </section>
+          </section>
         </div>
       </section>
-    </section>
     </main>
-        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="dashboard.js"></script>
   </body>
 </html>
