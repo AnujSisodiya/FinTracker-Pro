@@ -165,6 +165,12 @@ main{
     cursor:pointer;
     transition:.25s;
 }
+.feature-btn
+{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
 
 .nav-menu:hover{
     background:#f3f4f6;
@@ -245,6 +251,7 @@ main{
     font-weight:600;
     line-height:1;
 }
+
 .income-value{
     color:#15803d;
 }
@@ -255,11 +262,15 @@ main{
 
 .balance-value,
 .transaction-value{
-    color:#111827;
+    color:var(--primary-blue-text);
 }
 .cards-logo{
     width:22px;
     height:22px;
+}
+.balance-icon .cards-logo,
+.transaction-icon .cards-logo {
+    filter: invert(19%) sepia(87%) saturate(3065%) hue-rotate(220deg) brightness(87%) contrast(92%);
 }
 
 .fintrack-logo{
@@ -275,6 +286,7 @@ main{
     width: 15px;
 }
 .reset-icon{
+    filter: invert(15%) sepia(95%) saturate(3959%) hue-rotate(346deg) brightness(88%) contrast(92%);
     width:18px;
     height:18px;
 }
@@ -477,18 +489,18 @@ th{
     overflow-x:auto;
 }
 .nav-menu.active {
-    background: var(--bg-main);
-    color: var(--accent-black);
+    background: var(--primary-blue);
+    color: var(--primary-blue-text);
     border-left: 4px solid var(--accent-black);
     border-radius: 0 10px 10px 0;
 }
 
-#dashboard-page{
-    display: none;
+.page-content{
+    display:none;
 }
 
-#settings-page{
-    display: block;
+.page-content.active{
+    display:block;
 }
 .profile-card{
     display:flex;
@@ -533,6 +545,9 @@ th{
     font-size:14px;
     cursor:pointer;
 }
+.add-transaction{
+    display: none;
+}
 
 .add-transaction{
     display:flex;
@@ -544,7 +559,7 @@ th{
     border:1px solid var(--border-color);
     border-radius:12px;
     padding:28px;
-    margin: 0 28px;
+    margin: auto;
     box-shadow:0 1px 2px rgba(0,0,0,.04);
 }
 .heading-section{
@@ -557,6 +572,7 @@ th{
 .btn-close{
     border: none;
     cursor: pointer;
+    background-color: var(--bg-card);
     
 }
 .trasaction-type{
@@ -612,4 +628,100 @@ th{
     background: var(--bg-main);
     font-size:14px;
     cursor:pointer;
+}
+.modal{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.45);
+    display:none;
+    justify-content:center;
+    align-items:center;
+    z-index:1000;
+}
+
+/* Transaction history table */
+
+.history table{
+    width:100%;
+    border-collapse:collapse;
+    background:#fff;
+}
+
+.history thead tr{
+    border-bottom:2px solid #eef2f7;
+}
+
+.history th{
+    padding:16px 20px;
+    text-align:left;
+    font-size:13px;
+    font-weight:600;
+    color:#6b7280;
+    text-transform:uppercase;
+    letter-spacing:.5px;
+}
+
+.history td{
+    padding:20px;
+    font-size:16px;
+    border-bottom:1px solid #eef2f7;
+    vertical-align:middle;
+}
+
+.history tbody tr{
+    transition:.2s;
+}
+
+.history tbody tr:hover{
+    background:#f8fafc;
+}
+
+
+.income{
+    color:#15803d;
+    font-weight:700;
+}
+
+.expense{
+    color:#b91c1c;
+    font-weight:700;
+}
+.category-badge{
+    display:inline-flex;
+    align-items:center;
+    padding:6px 14px;
+    border-radius:8px;
+    background:#f3f4f6;
+    color:#374151;
+    font-size:13px;
+    font-weight:600;
+}
+
+.action-buttons{
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.edit-btn,.delete-btn{
+    border: none;
+    background: none;
+    cursor: pointer;
+    transition:.2s;
+}
+.edit-btn{
+    
+    color:#1d4ed8;
+}
+.edit-btn:hover{
+    color:#2563eb;
+    transform: scale(1.1);
+}
+.delete-btn{
+   color:#991b1b;
+}
+
+.delete-btn:hover{
+    color:#dc2626;
+    transform:scale(1.1);
 }
