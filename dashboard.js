@@ -43,7 +43,7 @@ transactionModal.addEventListener("click", (e) => {
 // Update the values form the Add Transaction Modal..
 
 let transactions = JSON.parse(localStorage.getItem("transactions")) || [];
-
+let editId = null;
 const saveBtn = document.querySelector(".savetranscationbtn");
 const transactionBody = document.getElementById("transactionBody");
 
@@ -51,6 +51,7 @@ const balanceValue = document.querySelector(".balance-value");
 const incomeValue = document.querySelector(".income-value");
 const expenseValue = document.querySelector(".expense-value");
 const transactionValue = document.querySelector(".transaction-value");
+
 
 saveBtn.addEventListener("click", () => {
   const type = document.getElementById("t-type").value;
@@ -73,7 +74,28 @@ saveBtn.addEventListener("click", () => {
     category,
   };
 
-  transactions.push(transaction);
+  if (editId === null) {
+
+    transactions.push(transaction);
+
+} else {
+
+    const index = transactions.findIndex(
+        transaction => transaction.id === editId
+    );
+
+    transactions[index] = {
+        id: editId,
+        type,
+        description,
+        amount,
+        date,
+        category
+    };
+
+    editId = null;
+
+}
 
   localStorage.setItem("transactions", JSON.stringify(transactions));
 
@@ -93,7 +115,13 @@ function updateDashboard() {
   updateTable();
   updateChart();
 }
+//Update the username in the Nav
 
+const user = JSON.parse(localStorage.getItem("user"));
+
+if(user){
+  document.getElementById("navbar-username").textContent =user.username;
+}
 
 //Update the Cards
 
@@ -122,47 +150,77 @@ const filter = document.getElementById("transaction-filter");
 filter.addEventListener("change", ()=>{
     updateTable();
 });
+//Search transactions
+const searchInput = document.getElementById("search");
+
+searchInput.addEventListener("input", () => {
+    updateTable();
+});
+
 
 //Update the Table
 
 function updateTable() {
-  transactionBody.innerHTML = "";
 
-  const selectedFilter =filter.value;
-  let filteredTransactions = transactions;
-  
-  if(selectedFilter === "Income"){
-    filteredTransactions = transactions.filter( transaction => transaction.type === "Income");
-  }
-  
-  if(selectedFilter === "Expense"){
-    filteredTransactions = transactions.filter( transaction => transaction.type === "Expense");
-  }
+    transactionBody.innerHTML = "";
 
-  transactions.forEach((transaction) => {
-    const row = document.createElement("tr");
-    row.innerHTML = `
-        <td>${transaction.date}</td>
-        <td>${transaction.description}</td>
-        <td>
-    <span class="category-badge">
-        ${transaction.category}
-    </span>
-</td>
-        <td class="${transaction.type === "Income" ? "income" : "expense"}">
-    ${transaction.type === "Income" ? "+" : "-"}₹${transaction.amount.toFixed(2)}
-</td>
-        <td> <div class="action-buttons">
-    <button class="edit-btn">
-        <i class="fa-solid fa-pen"></i>
-    </button>
-    <button class="delete-btn">
-         <i class="fa-solid fa-trash"></i>
-    </button>
-</div> </td>
+    const selectedFilter = filter.value;
+    const searchText = searchInput.value.toLowerCase();
+
+    let filteredTransactions = transactions;
+
+    if (selectedFilter !== "All Transaction") {
+        filteredTransactions = filteredTransactions.filter(transaction =>
+            transaction.type === selectedFilter
+        );
+    }
+
+   
+    filteredTransactions = filteredTransactions.filter(transaction =>
+        transaction.description.toLowerCase().includes(searchText) ||
+        transaction.category.toLowerCase().includes(searchText) ||
+        transaction.type.toLowerCase().includes(searchText) ||
+        transaction.date.includes(searchText)
+    );
+
+    filteredTransactions.forEach((transaction) => {
+
+        const row = document.createElement("tr");
+
+        row.innerHTML = `
+            <td>${transaction.date}</td>
+
+            <td>${transaction.description}</td>
+
+            <td>
+                <span class="category-badge">
+                    ${transaction.category}
+                </span>
+            </td>
+
+            <td>
+                <span class="${transaction.type === "Income" ? "income" : "expense"}">
+                    ${transaction.type === "Income" ? "+" : "-"}₹${transaction.amount.toFixed(2)}
+                </span>
+            </td>
+
+            <td>
+                <div class="action-buttons">
+                    <button class="edit-btn" onclick="editTransaction(${transaction.id})">
+                        <i class="fa-solid fa-pen"></i>
+                    </button>
+
+                    <button class="delete-btn" onclick="deleteTransaction(${transaction.id})">
+                        <i class="fa-solid fa-trash"></i>
+                    </button>
+                </div>
+            </td>
         `;
-    transactionBody.appendChild(row);
-  });
+
+        transactionBody.appendChild(row);
+
+    });
+
 }
 
 const resetbtn = document.querySelector(".reset");
@@ -180,6 +238,41 @@ resetbtn.addEventListener("click", () => {
   updateDashboard();
 });
 
+//Delete the transcation
+
+function deleteTransaction(id){
+    const confirmDelete = confirm("Delete this transaction?");
+
+    if(!confirmDelete) return;
+
+    transactions =transactions.filter(transaction => transaction.id !==id);
+   
+    localStorage.setItem(
+        "transactions",JSON.stringify(transactions)
+    );
+ updateDashboard();
+
+}
+
+//Edit the transaction 
+
+function editTransaction(id) {
+    editId = id;
+    const transaction = transactions.find(
+        transaction => transaction.id === id
+    );
+
+    if (!transaction) return;
+
+    document.getElementById("t-type").value = transaction.type;
+    document.getElementById("t-description").value = transaction.description;
+    document.getElementById("amount").value = transaction.amount;
+    document.getElementById("t-date").value = transaction.date;
+    document.getElementById("t-Category").value = transaction.category;
+
+    transactionModal.style.display = "flex";
+
+}
 //-----Chart----
 
 const ctx = document.getElementById("cashFlowChart");
@@ -278,4 +371,43 @@ function updateChart() {
   cashFlowChart.update();
 }
 
+
+//Dark Mode
+
+const darkToggle = document.getElementById("dashboard-dark-toggle");
+
+darkToggle.addEventListener("change", () => {
+
+    if (darkToggle.checked) {
+        document.body.classList.add("dark-mode");
+        localStorage.setItem("theme", "dark");
+    } else {
+        document.body.classList.remove("dark-mode");
+        localStorage.setItem("theme", "light");
+    }
+
+});
+
+const savedTheme = localStorage.getItem("theme");
+
+if (savedTheme === "dark") {
+    document.body.classList.add("dark-mode");
+    darkToggle.checked = true;
+}
+
+//Logout Button
+
+const logoutBtn = document.querySelector(".logout-btn");
+
+logoutBtn.addEventListener("click", () => {
+
+    const confirmLogout = confirm("Are you sure you want to logout?");
+
+    if (!confirmLogout) return;
+
+    localStorage.removeItem("isLoggedIn");
+
+    window.location.href = "login.html";
+
+});
 updateDashboard();

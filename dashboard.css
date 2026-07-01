@@ -14,8 +14,7 @@ body {
 main{
     width:100%;
     min-height:100vh;
-    background:#f8f9fb;
-   
+    background:var(--bg-main);
 }
 
 
@@ -33,6 +32,7 @@ main{
     --green-text: #166534;
     --red-light: #fee2e2;
     --red-text: #991b1b;
+    --button-theme:#000000;
 }
 .dashboard{
     width:100%;
@@ -47,7 +47,7 @@ main{
         "sidebar cards"
         "sidebar analytics";
 
-    background:#f8f9fb;
+    background:var(--bg-main);
 }
 
 .navbar{
@@ -57,7 +57,7 @@ main{
     align-items: center;
     gap: 18px;
     padding: 0 28px;
-    background: #fff;
+    background:var(--bg-card);
     border-bottom: 1px solid var(--border-color);
 }
 .divider{
@@ -75,7 +75,7 @@ main{
     align-items:center;
     gap:8px;
     padding:10px 16px;
-    background:#fff;
+   background:var(--bg-card);
     border:1px solid var(--border-color);
     border-radius:8px;
     cursor:pointer;
@@ -116,6 +116,7 @@ main{
         "alltransaction preferences"; 
     gap:20px;
     padding:0 28px 24px;
+    color: var(--text-dark);
 }
 .chart-card{
     grid-area: chart-card;
@@ -125,7 +126,8 @@ main{
     grid-area:preferences;
     display:flex;
     flex-direction:column;
-    background:#fff;
+    background:var(--bg-card);
+    color: var(--text-dark);
     border:1px solid var(--border-color);
     border-radius:12px;
     padding:18px;
@@ -148,8 +150,9 @@ main{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    background: #fff;
+    background: var(--bg-sidebar);
     border-right: 1px solid var(--border-color);
+    color: var(--text-dark);
 }
 .top-sidebar{
     padding:20px 16px;
@@ -174,6 +177,7 @@ main{
 
 .nav-menu:hover{
     background:#f3f4f6;
+    color: #000;
 }
 .bottom-sidebar{
     width:calc(100% - 32px);
@@ -181,9 +185,9 @@ main{
     padding:14px;
     border:none;
     border-radius:10px;
-    background:#000;
-    color:#fff;
-   font-size:12px;
+    background:var(--button-theme);
+    color:white;
+    font-size:12px;
     font-weight:550;
     cursor:pointer;
     transition:.25s;
@@ -204,7 +208,7 @@ main{
     flex-direction:column;
     gap:14px;
     padding:16px;
-    background:#fff;
+    background:var(--bg-card);
     border:1px solid var(--border-color);
     border-radius:12px;
     box-shadow:0 1px 2px rgba(0,0,0,.04);
@@ -399,7 +403,7 @@ input:checked + .slider:before{
     display: flex;
     flex-direction: column;
     padding: 24px;
-    background: var(--bg-card);
+    background: var(--bg-main);
     border: 1px solid var(--border-color);
     border-radius: 12px;
 } 
@@ -414,7 +418,8 @@ input:checked + .slider:before{
     display:flex;
     flex-direction:column;
     gap:20px;
-    background:#fff;
+    color: var(--text-dark);
+    background:var(--bg-card);
     border:1px solid var(--border-color);
     border-radius:12px;
     padding:20px;
@@ -440,12 +445,14 @@ input:checked + .slider:before{
     width:330px;
     height:38px;
     padding:0 16px;
+    
     border:1px solid var(--border-color);
     border-radius:8px;
     background: var(--bg-main);
 }
 
 .search input{
+    color: var(--text-dark);
     width:100%;
     border:none;
     outline:none;
@@ -457,6 +464,7 @@ input:checked + .slider:before{
    
 }
 .filter select{
+    color: var(--text-dark);
     width: 100%;
     height:38px;
     padding:0 14px;
@@ -507,7 +515,8 @@ th{
     flex-direction:column;
     width: 60%;
     gap:20px;
-    background:#fff;
+      color: var(--text-dark);
+    background:var(--bg-card);
     border:1px solid var(--border-color);
     border-radius:12px;
     padding:28px;
@@ -527,7 +536,7 @@ th{
     width: 140px;
     border:none;
     border-radius:10px;
-    background:#000;
+    background:var(--button-theme);
     color:#fff; 
     margin-top: 16px;
     font-size:13px;
@@ -539,6 +548,7 @@ th{
     width: 500px;
     height:38px;
     padding:0 14px;
+      color: var(--text-dark);
     border:1px solid var(--border-color);
     border-radius:8px;
     background: var(--bg-main);
@@ -555,7 +565,7 @@ th{
     width: 100%;
     max-width: 400px;
     gap:20px;
-    background:#fff;
+    background:var(--bg-main);
     border:1px solid var(--border-color);
     border-radius:12px;
     padding:28px;
@@ -564,6 +574,7 @@ th{
 }
 .heading-section{
     display: flex;
+     color:var(--text-dark);
     justify-content: space-between;
     align-items: center;
     font-size: 20px;
@@ -571,6 +582,7 @@ th{
 }
 .btn-close{
     border: none;
+     color:var(--text-dark);
     cursor: pointer;
     background-color: var(--bg-card);
     
@@ -578,9 +590,12 @@ th{
 .trasaction-type{
     display: flex;
     gap: 10px;
+     color:var(--text-dark);
     flex-direction: column;
 }
+
 .description{
+     color:var(--text-dark);
     display: flex;
     gap: 10px;
     flex-direction: column;
@@ -588,20 +603,24 @@ th{
 .Amt-date{
      display: flex;
      justify-content: space-between;
+      color:var(--text-dark);
      gap: 20px;
 }
 .amount{
     display: flex;
     flex-direction: column;
+    
     gap: 10px;
 }
 .date{
+     color:var(--text-dark);
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
 .trasaction-category{
     margin-top: 20px;
+     color:var(--text-dark);
     gap: 10px;
       display: flex;
     flex-direction: column;
@@ -611,7 +630,7 @@ th{
     border:none;
     border-radius:10px;
     background:#000;
-    color:#fff; 
+    color:var(--text-dark);
     margin-top: 16px;
     font-size:13px;
     font-weight:550;
@@ -625,6 +644,7 @@ th{
     width: 100%;
     border:1px solid var(--border-color);
     border-radius:8px;
+    color: var(--text-dark);
     background: var(--bg-main);
     font-size:14px;
     cursor:pointer;
@@ -644,7 +664,7 @@ th{
 .history table{
     width:100%;
     border-collapse:collapse;
-    background:#fff;
+    background:var(--bg-card);
 }
 
 .history thead tr{
@@ -656,7 +676,7 @@ th{
     text-align:left;
     font-size:13px;
     font-weight:600;
-    color:#6b7280;
+    color:var(--text-dark);
     text-transform:uppercase;
     letter-spacing:.5px;
 }
@@ -664,6 +684,7 @@ th{
 .history td{
     padding:20px;
     font-size:16px;
+    color:var(--text-dark);
     border-bottom:1px solid #eef2f7;
     vertical-align:middle;
 }
@@ -673,7 +694,8 @@ th{
 }
 
 .history tbody tr:hover{
-    background:#f8fafc;
+    background:#d7d7d7;
+    color:var(--bg-main);
 }
 
 
@@ -691,8 +713,8 @@ th{
     align-items:center;
     padding:6px 14px;
     border-radius:8px;
-    background:#f3f4f6;
-    color:#374151;
+    background:var(--bg-main);
+    color:var(--text-dark);
     font-size:13px;
     font-weight:600;
 }
@@ -724,4 +746,19 @@ th{
 .delete-btn:hover{
     color:#dc2626;
     transform:scale(1.1);
+}
+
+
+.dark-mode{
+    --bg-main:#111827;
+    --bg-card:#1f2937;
+    --bg-sidebar:#1f2937;
+    --text-dark:#f9fafb;
+    --text-muted:#9ca3af;
+    --border-color:#374151;
+    --primary-blue:#1e3a8a;
+    --primary-blue-text:#93c5fd;
+    --green-light:#14532d;
+    --red-light:#7f1d1d;
+    --button-theme:#3b82f6
 }
