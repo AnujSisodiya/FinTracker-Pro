@@ -21,5 +21,5 @@ registerForm.addEventListener("submit", function(e){
 
     alert("Registration Successful!");
 
-    window.location.href = "login.html";
+    window.location.href = "index.html";
 });

@@ -409,7 +409,7 @@ logoutBtn.addEventListener("click", () => {
 
     localStorage.removeItem("isLoggedIn");
 
-    window.location.href = "login.html";
+    window.location.href = "index.html";
 
 });
 
