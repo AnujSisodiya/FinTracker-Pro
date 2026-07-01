@@ -138,9 +138,11 @@ function updateCards() {
   });
 
   const balance = income - expense;
-  balanceValue.textContent = `₹${balance.toFixed(2)}`;
-  incomeValue.textContent = `₹${income.toFixed(2)}`;
-  expenseValue.textContent = `₹${expense.toFixed(2)}`;
+const symbol = getCurrencySymbol();
+
+balanceValue.textContent = `${symbol}${balance.toFixed(2)}`;
+incomeValue.textContent = `${symbol}${income.toFixed(2)}`;
+expenseValue.textContent = `${symbol}${expense.toFixed(2)}`;
   transactionValue.textContent = transactions.length;
 }
 
@@ -166,7 +168,7 @@ function updateTable() {
 
     const selectedFilter = filter.value;
     const searchText = searchInput.value.toLowerCase();
-
+    const symbol = getCurrencySymbol();
     let filteredTransactions = transactions;
 
     if (selectedFilter !== "All Transaction") {
@@ -200,7 +202,7 @@ function updateTable() {
 
             <td>
                 <span class="${transaction.type === "Income" ? "income" : "expense"}">
-                    ${transaction.type === "Income" ? "+" : "-"}₹${transaction.amount.toFixed(2)}
+                    ${transaction.type === "Income" ? "+" : "-"}${symbol}${transaction.amount.toFixed(2)}
                 </span>
             </td>
 
@@ -410,4 +412,62 @@ logoutBtn.addEventListener("click", () => {
     window.location.href = "login.html";
 
 });
+
+// Username change and Currency
+const profileName = document.getElementById("profile-username");
+const currencySelect = document.getElementById("p-currency");
+const saveProfileBtn = document.querySelector(".savebtn");
+
+saveProfileBtn.addEventListener("click", ()=>{
+  const profile ={
+    name: profileName.value.trim(),
+    currency:currencySelect.value
+  };
+
+  localStorage.setItem("profile", JSON.stringify(profile));
+
+  loadProfile();
+
+  alert("Profile updated Successfuly!");
+});
+
+function loadProfile() {
+
+    const profile = JSON.parse(localStorage.getItem("profile"));
+
+    if (!profile) return;
+
+    profileName.value = profile.name;
+    currencySelect.value = profile.currency;
+
+    document.getElementById("navbar-username").textContent = profile.name;
+
+    updateDashboard();
+
+}
+
+function getCurrencySymbol(){
+  const profile =JSON.parse(localStorage.getItem("profile"));
+
+  if(!profile) return  "₹";
+
+     switch(profile.currency){
+
+        case "USD":
+            return "$";
+
+        case "EUR":
+            return "€";
+
+        case "GBP":
+            return "£";
+
+        case "JPY":
+            return "¥";
+
+        default:
+            return "₹";
+    }
+}
+loadProfile();
 updateDashboard();

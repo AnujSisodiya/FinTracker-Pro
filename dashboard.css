@@ -298,6 +298,7 @@ main{
     display:flex;
     align-items:center;
     gap:12px;
+    margin-top: 10px;
     margin-bottom:34px;
 }
 .logo h2{
@@ -308,6 +309,7 @@ main{
 
 .logo p{
     font-size:13px;
+    
 }
 
 /* The switch - the box around the slider */
